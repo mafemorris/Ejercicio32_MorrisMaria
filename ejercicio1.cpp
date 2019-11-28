@@ -55,8 +55,11 @@ void crear(float** psi, float tmax, float T, float ro, float L, float deltax, fl
             if(j==0 || i==0 || x == L){
                 psi[j][i] = 1e-4 * sin(2*M_PI*x/L);
             }
+            else if(j==1){
+                psi[j][i] = psi[j-1][i] + c*c/(2*cp*cp) * (psi[j-1][i+1] + psi[j-1][i-1] - 2* psi[j-1][i]);
+            }
             else{
-                psi[j][i] = 2*psi[j-1][i] - psi[j-1][i] + pow(c,2)/pow(cp,2) * ( psi[j-1][i+1] + psi[j-1][i-1] - 2*psi[j-1][i]);
+                psi[j][i] = 2*psi[j-1][i] - psi[j-2][i] + pow(c,2)/pow(cp,2) * ( psi[j-1][i+1] + psi[j-1][i-1] - 2*psi[j-1][i]);
             }
             x+=deltax;
         }
