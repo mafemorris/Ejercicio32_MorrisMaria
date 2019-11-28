@@ -45,11 +45,12 @@ int main(){
 }
 
 void crear(float** psi, float tmax, float T, float ro, float L, float deltax, float deltat, int Nx, int Nt){
-    float x = 0;
+    
     float c = T/ro;
     float cp = deltax/deltat;
     for(int j = 0; j < Nt; j++){
         psi[j] = new float[Nx];
+        float x = 0;
         for(int i = 0; i< Nx; i++){
             if(j==0 || i==0 || x == L){
                 psi[j][i] = 1e-4 * sin(2*M_PI*x/L);
@@ -59,6 +60,5 @@ void crear(float** psi, float tmax, float T, float ro, float L, float deltax, fl
             }
             x+=deltax;
         }
-        x=0;
     }
 }
